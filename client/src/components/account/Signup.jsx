@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+import { SignupForm, SignupWrapper } from "./Signup.style";
 
 const Signup = () => {
   return (
-    <div>Signup</div>
-  )
-}
+    <SignupWrapper>
+      <SignupForm>
+        <input type="text" placeholder="Name" />
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button type="submit">Log in</button>
+      </SignupForm>
+    </SignupWrapper>
+  );
+};
 
-export default Signup
+export default Signup;

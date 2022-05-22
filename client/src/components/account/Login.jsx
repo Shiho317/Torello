@@ -1,8 +1,15 @@
 import React from 'react'
+import { LoginForm, LoginWrapper } from './Login.style'
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <LoginWrapper>
+      <LoginForm>
+        <input type='email' placeholder="Email" />
+        <input type='password' placeholder="Password" />
+        <button type='submit'>Log in</button>
+      </LoginForm>
+    </LoginWrapper>
   )
 }
 

@@ -1,8 +1,13 @@
 import React from 'react'
+import { DoneWrapper } from './Done.style'
 
 const Done = () => {
   return (
-    <div>Done</div>
+    <DoneWrapper>
+      <h4>Done</h4>
+      <div>
+      </div>
+    </DoneWrapper>
   )
 }
 
