@@ -10,13 +10,10 @@ const mediaSize = {
 
 export const theme = {
   color: {
-    black: '#000000',
-    lightblack: '#191414',
-    green: '#22db63',
-    lightgreen: '#32df6f',
-    white: '#ffffff',
+    black: '#1A132F',
     deepgrey: '#535353',
     lightgrey: '#B3B3B3',
+    white: '#FFFAF1'
   },
   device: {
     mobileS: `(min-width: ${mediaSize.mobileS})`,
