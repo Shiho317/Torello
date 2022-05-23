@@ -5,7 +5,7 @@ export const ListWrapper = styled.div`
   width: 17rem;
   height: 100%;
   border-radius: 5px;
-  padding: 0.3rem 1rem;
+  padding: 0.3rem;
 `;
 
 export const CardTitle = styled.div`
@@ -16,9 +16,13 @@ export const CardTitle = styled.div`
   align-items: center;
 
   & h4{
+    padding-left: 0.5rem;
     font-size: 0.8rem;
     color: black;
   }
+`
+
+export const CreateCard = styled.div`
 `
 
 export const AddCard = styled.div`

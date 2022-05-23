@@ -4,11 +4,13 @@ import {
   CardOption,
   CardSetting,
   CardTitle,
+  CreateCard,
   ListWrapper,
   SettingTitle,
 } from "./List.style";
 import { MdOutlineAdd, MdClose } from "react-icons/md";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
+import NewCard from "./NewCard";
 
 const List = ({ list }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -16,6 +18,8 @@ const List = ({ list }) => {
   const onClickSetting = () => {
     setModalOpen((prev) => !prev);
   };
+
+  const [ addNewCard, setAddNewCard ] = useState(false);
 
   return (
     <ListWrapper>
@@ -41,10 +45,16 @@ const List = ({ list }) => {
           )}
         </CardOption>
       </CardTitle>
-      <AddCard>
-        <MdOutlineAdd />
-        <p>Add a card</p>
-      </AddCard>
+      <CreateCard onClick={() => setAddNewCard(true)}>
+        {addNewCard ? (
+          <NewCard setAddNewCard={setAddNewCard} />
+        ) : (
+          <AddCard>
+            <MdOutlineAdd />
+            <p>Add a card</p>
+          </AddCard>
+        )}
+      </CreateCard>
     </ListWrapper>
   );
 };

@@ -18,8 +18,10 @@ router.post("/todolists", async(req, res) => {
         $set: {
           todo: [
             ...todo,
-            
-          ]
+            req.body.todo
+          ],
+          due: req.body.due,
+          user: req.body.user
         }
       }
     )
