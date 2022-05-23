@@ -12,7 +12,8 @@ export const theme = {
   color: {
     black: '#1A132F',
     deepgrey: '#535353',
-    lightgrey: '#B3B3B3',
+    grey: '#DCDCDC',
+    lightgrey: '#ECECEC',
     white: '#FFFAF1'
   },
   device: {

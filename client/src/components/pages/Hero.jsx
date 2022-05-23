@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { HeroWrapper } from "./Hero.style";
+import { AddList, HeroWrapper } from "./Hero.style";
 import List from "./List";
+import { MdOutlineAdd } from 'react-icons/md'
 
 const Hero = () => {
   const [todolists, setTodolists] = useState([]);
@@ -27,6 +28,10 @@ const Hero = () => {
       {todolists.map((list) => (
         <List key={list._id} list={list} />
       ))}
+      <AddList>
+        <MdOutlineAdd/>
+        <h4>Add another list</h4>
+      </AddList>
     </HeroWrapper>
   );
 };

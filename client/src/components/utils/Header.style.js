@@ -6,17 +6,17 @@ export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: ${props => props.theme.color.black};
-  color: ${props => props.theme.color.white};
+  background: ${(props) => props.theme.color.black};
+  color: ${(props) => props.theme.color.white};
   padding: 0 2rem;
-`
+`;
 
 export const Icon = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: ${props => props.theme.color.lightgrey};
+  background-color: ${(props) => props.theme.color.lightgrey};
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
