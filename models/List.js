@@ -2,18 +2,15 @@ const mongoose = require('mongoose');
 
 const ListSchema = new mongoose.Schema(
   {
+    title: {
+      type: String,
+      required: true
+    },
     todo: {
-      type: String,
+      type: Array,
+      default: [],
       required: true
     },
-    person: {
-      type: String,
-      required: true
-    },
-    due: {
-      type: String,
-      required: false
-    }
   },
   { timestamps: true }
 );

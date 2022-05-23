@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import { GlobalStyle } from "./styles/globalstyles";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/themestyles";
@@ -9,9 +9,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/account/Login";
 import Signup from "./components/account/Signup";
 
+export const AppContext = createContext();
+
 function App() {
+  const myStorage = window.localStorage;
+  const userInfo = myStorage.getItem("user");
+
+  const [ loggedIn, setLoggedIn ] = useState(false)
+
   return (
-    <>
+    <AppContext.Provider value={{ myStorage, userInfo, loggedIn, setLoggedIn }}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Router>
@@ -24,7 +31,7 @@ function App() {
           <Footer />
         </Router>
       </ThemeProvider>
-    </>
+    </AppContext.Provider>
   );
 }
 

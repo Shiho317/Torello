@@ -1,9 +1,12 @@
 import axios from 'axios'
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { AppContext } from '../../App'
 import { FormWrapper, LoginForm, LoginWrapper } from './Login.style'
 
 const Login = () => {
+
+  const { myStorage, setLoggedIn } = useContext(AppContext)
 
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
@@ -11,24 +14,29 @@ const Login = () => {
   const navigate = useNavigate()
 
   const loginAccount = async(e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const currUser = {
-      email: emailRef,
-      password: passwordRef
+      email: emailRef.current.value,
+      password: passwordRef.current.value
     }
 
     try {
-      const result = await axios.get("http://localhost:8888", currUser)
+      const result = await axios.post("http://localhost:8888/api/user/login", currUser)
       const userData = {
         name: result.data.name,
         email: result.data.email,
-        password: result.data.password,
-        id: result.data._id
+        id: result.data.id
       }
-      
+      myStorage.setItem("user", JSON.stringify(userData))
+      setLoggedIn(true)
+      alert("You have successfully logged in.")
+      setTimeout(() => {
+        navigate("/workspace")
+      }, 500)
     } catch (error) {
-      
+      console.log(error)
+      alert("Something went wrong!")
     }
   }
 
@@ -36,9 +44,9 @@ const Login = () => {
     <LoginWrapper>
       <FormWrapper>
         <h1>Login</h1>
-      <LoginForm onSubmit={(e) => loginAccount(e)}>
-        <input type='email' placeholder="Email" ref={emailRef} />
-        <input type='password' placeholder="Password" ref={passwordRef} />
+      <LoginForm onSubmit={loginAccount}>
+        <input type='email' name='email' placeholder="Email" ref={emailRef} />
+        <input type='password' name='password' placeholder="Password" ref={passwordRef} />
         <button type='submit'>Log in</button>
       </LoginForm>
         <Link to='/signup'>
