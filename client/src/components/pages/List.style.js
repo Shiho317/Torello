@@ -56,6 +56,7 @@ export const CardOption = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 
   &:hover {
     background: ${props => props.theme.color.grey};
@@ -122,4 +123,11 @@ export const SettingTitle = styled.div`
     align-items: center;
     color: ${props => props.theme.color.deepgrey};
   }
+`
+
+export const TodosWrapper = styled.div`
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `

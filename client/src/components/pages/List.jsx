@@ -7,19 +7,21 @@ import {
   CreateCard,
   ListWrapper,
   SettingTitle,
+  TodosWrapper,
 } from "./List.style";
 import { MdOutlineAdd, MdClose } from "react-icons/md";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import NewCard from "./NewCard";
+import Todos from "./Todos";
 
-const List = ({ list }) => {
+const List = ({ list, loadLists }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const onClickSetting = () => {
     setModalOpen((prev) => !prev);
   };
 
-  const [ addNewCard, setAddNewCard ] = useState(false);
+  const [addNewCard, setAddNewCard] = useState(false);
 
   return (
     <ListWrapper>
@@ -45,11 +47,16 @@ const List = ({ list }) => {
           )}
         </CardOption>
       </CardTitle>
-      <CreateCard onClick={() => setAddNewCard(true)}>
+      <TodosWrapper>
+      {list.todos.map((item, index) => (
+        <Todos key={index} todo={item} />
+      ))}
+      </TodosWrapper>
+      <CreateCard>
         {addNewCard ? (
-          <NewCard setAddNewCard={setAddNewCard} />
+          <NewCard list={list} setAddNewCard={setAddNewCard} loadLists={loadLists}/>
         ) : (
-          <AddCard>
+          <AddCard onClick={() => setAddNewCard(true)}>
             <MdOutlineAdd />
             <p>Add a card</p>
           </AddCard>

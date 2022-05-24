@@ -46,13 +46,14 @@ export const FormButtons = styled.div`
 & .cancel-btn{
   width: 5rem;
   height: 2rem;
-  background: ${props => props.theme.color.grey};
-  color: black;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
+  background: ${props => props.theme.color.grey};
+  color: black;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   & p{
     font-size: 0.8rem;

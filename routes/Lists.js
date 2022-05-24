@@ -13,18 +13,14 @@ router.get("/todolists", async (req, res) => {
 router.post("/todolists", async(req, res) => {
   try {
     await List.findOneAndUpdate(
-      {_id: ''},
+      {_id: req.body.id},
       {
         $set: {
-          todo: [
-            ...todo,
-            req.body.todo
-          ],
-          due: req.body.due,
-          user: req.body.user
+          todos: req.body.todos
         }
       }
     )
+    res.status(200).json();
   } catch (error) {
     res.status(500).json(error);
   }

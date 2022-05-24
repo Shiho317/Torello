@@ -26,7 +26,7 @@ const Hero = () => {
   return (
     <HeroWrapper>
       {todolists.map((list) => (
-        <List key={list._id} list={list} />
+        <List key={list._id} list={list} loadLists={loadLists} />
       ))}
       <AddList>
         <MdOutlineAdd/>

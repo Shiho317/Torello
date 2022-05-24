@@ -6,7 +6,7 @@ const ListSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    todo: {
+    todos: {
       type: Array,
       default: [],
       required: true
