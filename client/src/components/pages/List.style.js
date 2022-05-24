@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const ListWrapper = styled.div`
   background: ${(props) => props.theme.color.lightgrey};
   width: 17rem;
-  height: 100%;
   border-radius: 5px;
   padding: 0.3rem;
 `;
@@ -20,9 +19,6 @@ export const CardTitle = styled.div`
     font-size: 0.8rem;
     color: black;
   }
-`
-
-export const CreateCard = styled.div`
 `
 
 export const AddCard = styled.div`
@@ -57,12 +53,14 @@ export const CardOption = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1;
-
+  
   &:hover {
     background: ${props => props.theme.color.grey};
   }
 
-  & button{
+  & .option-btn{
+    width: 100%;
+    height: 100%;
     background: none;
     border: none;
     cursor: pointer;
@@ -76,6 +74,7 @@ export const CardSetting = styled.div`
   left: 0;
   background: white;
   border-radius: 2px;
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.2);
 
   & ul{
     display: flex;
@@ -130,4 +129,31 @@ export const TodosWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+`
+
+export const RenameForm = styled.form`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & input {
+    width: 10rem;
+    height: 2rem;
+    border: none;
+    padding: 0 0.5rem;
+  }
+
+  & button{
+    padding: 0.5rem;
+    background: ${props => props.theme.color.black};
+    border: none;
+    color: ${props => props.theme.color.white};
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:hover{
+      opacity: 0.8;
+    }
+  }
 `

@@ -20,22 +20,22 @@ const Header = () => {
 
   const loggedOut = () => {
     const resetCurrUser = {
-      name: '',
-      email: '',
-      id: ''
-    }
+      name: "",
+      email: "",
+      id: "",
+    };
     myStorage.setItem("user", JSON.stringify(resetCurrUser));
-    setLoggedIn(false)
+    setLoggedIn(false);
     alert("You have successfully logged out.");
     setTimeout(() => {
       navigate("/");
     }, 500);
-  }
+  };
 
   return (
     <HeaderWrapper>
       <h4>Trello</h4>
-      <h3>workspace name</h3>
+      <h3>our workspace</h3>
       {currUser.name.length > 0 ? (
         <Icon onClick={() => openToggle()}>
           <p>{currUser.name.split("")[0].toUpperCase()}</p>

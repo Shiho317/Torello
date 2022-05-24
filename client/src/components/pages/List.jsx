@@ -4,8 +4,8 @@ import {
   CardOption,
   CardSetting,
   CardTitle,
-  CreateCard,
   ListWrapper,
+  RenameForm,
   SettingTitle,
   TodosWrapper,
 } from "./List.style";
@@ -13,35 +13,88 @@ import { MdOutlineAdd, MdClose } from "react-icons/md";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import NewCard from "./NewCard";
 import Todos from "./Todos";
+import axios from "axios";
 
 const List = ({ list, loadLists }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const onClickSetting = () => {
     setModalOpen((prev) => !prev);
+    setIsRenameModal(false)
   };
 
   const [addNewCard, setAddNewCard] = useState(false);
 
+  const deleteList = async() => {
+
+    const deletedList = {
+      id: list._id
+    }
+
+    try {
+      await axios.post("http://localhost:8888/api/list/deletelist", deletedList)
+      .then(result => {
+        loadLists()
+        setModalOpen(false)
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const [ isRenameModal, setIsRenameModal ] = useState(false)
+  const [ isListTitle, setIsListTitle ] = useState(list.title)
+
+  const renameModalToggle = () => {
+    setIsRenameModal(prev => !prev)
+  }
+
+  const renameList = async(e) => {
+    e.preventDefault();
+
+    const renamedList = {
+      id: list._id,
+      title: isListTitle
+    }
+
+    try {
+      await axios.post("http://localhost:8888/api/list/renamelist", renamedList)
+      .then(result => {
+        setIsRenameModal(prev => !prev)
+        setModalOpen(false)
+        loadLists()
+      })
+    } catch (error) {
+      
+    }
+  }
+
   return (
     <ListWrapper>
       <CardTitle>
-        <h4>{list.title}</h4>
-        <CardOption onClick={() => onClickSetting()}>
-          <button>
+        { isRenameModal ? (
+          <RenameForm onSubmit={renameList}>
+            <input type='text' value={isListTitle} onChange={(e) => setIsListTitle(e.target.value)} required />
+            <button type="submit">Rename</button>
+          </RenameForm>
+        ) : (
+          <h4>{list.title}</h4>
+        )}
+        <CardOption>
+          <button className="option-btn" onClick={() => onClickSetting()}>
             <BiDotsHorizontalRounded />
           </button>
           {modalOpen && (
             <CardSetting>
               <SettingTitle>
                 <p>List options</p>
-                <button>
+                <button onClick={() => onClickSetting()}>
                   <MdClose />
                 </button>
               </SettingTitle>
               <ul>
-                <li>Rename</li>
-                <li>Delete</li>
+                <li onClick={() => renameModalToggle()}>Rename</li>
+                <li onClick={() => deleteList()}>Delete</li>
               </ul>
             </CardSetting>
           )}
@@ -52,7 +105,6 @@ const List = ({ list, loadLists }) => {
         <Todos key={index} todo={item} />
       ))}
       </TodosWrapper>
-      <CreateCard>
         {addNewCard ? (
           <NewCard list={list} setAddNewCard={setAddNewCard} loadLists={loadLists}/>
         ) : (
@@ -61,7 +113,6 @@ const List = ({ list, loadLists }) => {
             <p>Add a card</p>
           </AddCard>
         )}
-      </CreateCard>
     </ListWrapper>
   );
 };

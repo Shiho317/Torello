@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { AddList, HeroWrapper } from "./Hero.style";
 import List from "./List";
 import { MdOutlineAdd } from 'react-icons/md'
+import AddNewList from "./AddNewList";
 
 const Hero = () => {
   const [todolists, setTodolists] = useState([]);
@@ -23,15 +24,22 @@ const Hero = () => {
     loadLists();
   }, []);
 
+  const [ addNewList, setAddNewList ] = useState(false)
+
   return (
     <HeroWrapper>
       {todolists.map((list) => (
         <List key={list._id} list={list} loadLists={loadLists} />
       ))}
-      <AddList>
+      { addNewList ? (
+        <AddNewList setAddNewList={setAddNewList} loadLists={loadLists} />
+      ) : (
+        <AddList onClick={() => setAddNewList(true)}>
         <MdOutlineAdd/>
         <h4>Add another list</h4>
-      </AddList>
+        </AddList>
+      )}
+      
     </HeroWrapper>
   );
 };

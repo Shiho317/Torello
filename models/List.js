@@ -9,7 +9,7 @@ const ListSchema = new mongoose.Schema(
     todos: {
       type: Array,
       default: [],
-      required: true
+      required: false
     },
   },
   { timestamps: true }

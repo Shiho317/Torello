@@ -59,5 +59,4 @@ export const FormButtons = styled.div`
     font-size: 0.8rem;
   }
 }
-
 `

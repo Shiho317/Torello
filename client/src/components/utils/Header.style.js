@@ -35,19 +35,20 @@ export const LogoutModal = styled.ul`
   align-items: center;
   justify-content: center;
   box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.2);
-  
-  & li{
+
+  & li {
     list-style: none;
 
-    & p{
+    & p {
+      font-size: 0.8rem;
       color: black;
 
-      &:hover{
+      &:hover {
         text-decoration: underline;
       }
     }
   }
-`
+`;
 
 export const AccountOption = styled.div`
   display: flex;
@@ -55,13 +56,13 @@ export const AccountOption = styled.div`
   justify-content: center;
   gap: 1rem;
 
-  & a{
+  & a {
     text-decoration: none;
-    color: ${props => props.theme.color.white};
+    color: ${(props) => props.theme.color.white};
 
-    &:hover{
+    &:hover {
       transition: all 0.3s ease;
       opacity: 0.8;
     }
   }
-`
+`;

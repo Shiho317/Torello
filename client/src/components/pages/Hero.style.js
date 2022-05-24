@@ -3,10 +3,12 @@ import styled from "styled-components";
 export const HeroWrapper = styled.div`
   padding: 2rem;
   width: 100%;
+  height: 80vh;
   display: flex;
   gap: 1rem;
   align-items: flex-start;
   justify-content: flex-start;
+  overflow: scroll;
 `;
 
 export const AddList = styled.div`
