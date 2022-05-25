@@ -42,7 +42,7 @@ const Todos = ({ list, todo, index, loadLists }) => {
             <p>{todo.due}</p>
           </TodoDue>
           <TodoUser>
-            <p>{userLogo}</p>
+            <p style={{backgroundColor: todo.color}}>{userLogo}</p>
           </TodoUser>
           <button onClick={() => deleteTodo()}>
             <MdClose />

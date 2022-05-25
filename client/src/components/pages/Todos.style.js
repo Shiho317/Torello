@@ -54,7 +54,6 @@ export const TodoUser = styled.div`
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: ${(props) => props.theme.color.lightgrey};
     color: white;
     font-size: 0.8rem;
     display: flex;

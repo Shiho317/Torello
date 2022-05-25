@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
 import {
   AccountOption,
@@ -9,9 +9,8 @@ import {
 } from "./Header.style";
 
 const Header = () => {
-  const { userInfo, myStorage, setLoggedIn } = useContext(AppContext);
+  const { userInfo, myStorage } = useContext(AppContext);
   const currUser = JSON.parse(userInfo);
-  const navigate = useNavigate();
 
   const [openLogout, setOpenLogout] = useState(false);
   const openToggle = () => {
@@ -22,13 +21,13 @@ const Header = () => {
     const resetCurrUser = {
       name: "",
       email: "",
+      color: "#ECECEC",
       id: "",
     };
     myStorage.setItem("user", JSON.stringify(resetCurrUser));
-    setLoggedIn(false);
     alert("You have successfully logged out.");
     setTimeout(() => {
-      navigate("/");
+      window.location.href = "/"
     }, 500);
   };
 
@@ -36,8 +35,11 @@ const Header = () => {
     <HeaderWrapper>
       <h4>Trello</h4>
       <h3>our workspace</h3>
-      {currUser.name.length > 0 ? (
-        <Icon onClick={() => openToggle()}>
+      {currUser.email.length > 0 ? (
+        <Icon
+          style={{ backgroundColor: currUser.color }}
+          onClick={() => openToggle()}
+        >
           <p>{currUser.name.split("")[0].toUpperCase()}</p>
           {openLogout && (
             <LogoutModal>

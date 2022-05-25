@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const randomColor = require("randomcolor");
 
 //signup
 
@@ -15,6 +16,7 @@ router.post("/signup", async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword,
+      color: randomColor()
     });
 
     //save user and respond
@@ -50,6 +52,7 @@ router.post("/login", async (req, res) => {
     res.status(200).json({
       name: user.name,
       email: user.email,
+      color: user.color,
       id: user._id,
     });
   } catch (error) {

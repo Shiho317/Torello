@@ -24,6 +24,7 @@ const NewCard = ({ setAddNewCard, list, loadLists }) => {
           todo: cardValue,
           due: dateValue,
           user: currUser.name,
+          color: currUser.color
         },
       ],
     };
@@ -55,7 +56,7 @@ const NewCard = ({ setAddNewCard, list, loadLists }) => {
         value={dateValue}
         onChange={(e) => setDateValue(e.target.value)}
       />
-      <p className="user">{currUser.name}</p>
+      <p className="user" style={{backgroundColor: currUser.color}}>{currUser.name}</p>
       <FormButtons>
         <button type="submit" className="submit-btn">
           Create

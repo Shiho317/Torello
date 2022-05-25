@@ -27,7 +27,7 @@ const Hero = () => {
 
   const [addNewList, setAddNewList] = useState(false);
 
-  const onDragEnd = async (result) => {
+  const onDragEnd = (result) => {
     const { destination, source } = result;
 
     if (!destination) {
@@ -56,10 +56,7 @@ const Hero = () => {
       };
 
       try {
-        await axios.post(
-          "http://localhost:8888/api/list/todolists",
-          sourceTodos
-        );
+        axios.post("http://localhost:8888/api/list/todolists", sourceTodos);
       } catch (error) {
         console.log(error);
       }
@@ -77,7 +74,7 @@ const Hero = () => {
       };
 
       try {
-        await axios
+        axios
           .post("http://localhost:8888/api/list/todolists", destinationTodos)
           .then((result) => {
             loadLists();

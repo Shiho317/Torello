@@ -16,7 +16,6 @@ export const NewCardWrapper = styled.form`
   & .user{
     width: 10rem;
     padding: 0.5rem;
-    background: ${props => props.theme.color.grey};
     font-size: 0.8rem;
     border-radius: 5px;
   }
