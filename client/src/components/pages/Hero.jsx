@@ -12,7 +12,7 @@ const Hero = () => {
   const loadLists = async () => {
     try {
       await axios
-        .get("http://localhost:8888/api/list/todolists")
+        .get("/api/list/todolists")
         .then((result) => {
           setTodolists(result.data);
         });
@@ -56,7 +56,7 @@ const Hero = () => {
       };
 
       try {
-        axios.post("http://localhost:8888/api/list/todolists", sourceTodos);
+        axios.post("/api/list/todolists", sourceTodos);
       } catch (error) {
         console.log(error);
       }
@@ -75,7 +75,7 @@ const Hero = () => {
 
       try {
         axios
-          .post("http://localhost:8888/api/list/todolists", destinationTodos)
+          .post("/api/list/todolists", destinationTodos)
           .then((result) => {
             loadLists();
           });

@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       const result = await axios.post(
-        "http://localhost:8888/api/user/login",
+        "/api/user/login",
         currUser
       );
       const userData = {
