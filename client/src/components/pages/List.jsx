@@ -109,7 +109,13 @@ const List = ({ list, loadLists }) => {
         {(provided) => (
           <TodosWrapper {...provided.droppableProps} ref={provided.innerRef}>
             {list.todos.map((item, index) => (
-              <Todos key={index} todo={item} index={index} />
+              <Todos
+                key={index}
+                list={list}
+                todo={item}
+                index={index}
+                loadLists={loadLists}
+              />
             ))}
             {provided.placeholder}
           </TodosWrapper>

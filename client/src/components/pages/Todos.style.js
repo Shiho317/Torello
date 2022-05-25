@@ -7,11 +7,24 @@ export const TodoWrapper = styled.div`
   background: white;
   border-radius: 5px;
 
-  & p{
+  & p {
     color: black;
     font-size: 0.9rem;
   }
-`
+
+  & button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${(props) => props.theme.color.deepgrey};
+  }
+`;
 
 export const TodoDue = styled.div`
   width: 50%;
@@ -24,12 +37,12 @@ export const TodoDue = styled.div`
   color: white;
   border-radius: 3px;
   margin-top: 0.3rem;
-  
-  & p{
+
+  & p {
     color: white;
     font-size: 0.8rem;
   }
-`
+`;
 
 export const TodoUser = styled.div`
   display: flex;
@@ -37,15 +50,15 @@ export const TodoUser = styled.div`
   justify-content: flex-end;
   margin-top: 0.3rem;
 
-  & p{
+  & p {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: ${props => props.theme.color.lightgrey};
+    background: ${(props) => props.theme.color.lightgrey};
     color: white;
     font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-`
+`;

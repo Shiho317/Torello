@@ -27,7 +27,7 @@ const Hero = () => {
 
   const [addNewList, setAddNewList] = useState(false);
 
-  const onDragEnd = (result) => {
+  const onDragEnd = async (result) => {
     const { destination, source } = result;
 
     if (!destination) {
@@ -49,6 +49,20 @@ const Hero = () => {
     if (findSource) {
       add = findSource.todos[source.index];
       findSource.todos.splice(source.index, 1);
+
+      const sourceTodos = {
+        id: findSource._id,
+        todos: findSource.todos,
+      };
+
+      try {
+        await axios.post(
+          "http://localhost:8888/api/list/todolists",
+          sourceTodos
+        );
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     const findDestination = todolists.find(
@@ -56,6 +70,21 @@ const Hero = () => {
     );
     if (findDestination) {
       findDestination.todos.splice(destination.index, 0, add);
+
+      const destinationTodos = {
+        id: findDestination._id,
+        todos: findDestination.todos,
+      };
+
+      try {
+        await axios
+          .post("http://localhost:8888/api/list/todolists", destinationTodos)
+          .then((result) => {
+            loadLists();
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
