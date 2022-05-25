@@ -1,14 +1,16 @@
 import axios from "axios";
 import React, { useContext, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
 import { FormWrapper, LoginForm, LoginWrapper } from "./Login.style";
 
 const Login = () => {
-  const { myStorage } = useContext(AppContext);
+  const { myStorage, setLoggedIn } = useContext(AppContext);
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
+  const navigate = useNavigate()
 
   const loginAccount = async (e) => {
     e.preventDefault();
@@ -31,8 +33,9 @@ const Login = () => {
       };
       myStorage.setItem("user", JSON.stringify(userData));
       alert("You have successfully logged in.");
+      setLoggedIn(true)
       setTimeout(() => {
-        window.location.href = "/workspace"
+        navigate("/workspace")
       }, 500);
     } catch (error) {
       console.log(error);

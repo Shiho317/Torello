@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
 import {
   AccountOption,
@@ -9,8 +9,10 @@ import {
 } from "./Header.style";
 
 const Header = () => {
-  const { userInfo, myStorage } = useContext(AppContext);
+  const { userInfo, myStorage, loggedIn, setLoggedIn } = useContext(AppContext);
   const currUser = JSON.parse(userInfo);
+
+  const navigate = useNavigate()
 
   const [openLogout, setOpenLogout] = useState(false);
   const openToggle = () => {
@@ -26,8 +28,9 @@ const Header = () => {
     };
     myStorage.setItem("user", JSON.stringify(resetCurrUser));
     alert("You have successfully logged out.");
+    setLoggedIn(false)
     setTimeout(() => {
-      window.location.href = "/"
+      navigate("/")
     }, 500);
   };
 
@@ -35,7 +38,7 @@ const Header = () => {
     <HeaderWrapper>
       <h4>Trello</h4>
       <h3>our workspace</h3>
-      {currUser.email.length > 0 ? (
+      {loggedIn ? (
         <Icon
           style={{ backgroundColor: currUser.color }}
           onClick={() => openToggle()}
