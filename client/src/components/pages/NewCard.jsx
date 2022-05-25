@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import { FormButtons, NewCardWrapper } from "./NewCard.style";
+import { v4 as uuidv4 } from "uuid";
 
 const NewCard = ({ setAddNewCard, list, loadLists }) => {
   const { userInfo } = useContext(AppContext);
@@ -17,21 +18,23 @@ const NewCard = ({ setAddNewCard, list, loadLists }) => {
     const newTodo = {
       id: list._id,
       todos: [
-      ...list.todos,
-      {
-        todo: cardValue,
-        due: dateValue,
-        user: currUser.name
-      }
-    ]
-  }
+        ...list.todos,
+        {
+          id: uuidv4(),
+          todo: cardValue,
+          due: dateValue,
+          user: currUser.name,
+        },
+      ],
+    };
     try {
-      await axios.post("http://localhost:8888/api/list/todolists", newTodo)
-      .then(result => {
-        console.log(result.status)
-        loadLists()
-        setAddNewCard(false)
-      })
+      await axios
+        .post("http://localhost:8888/api/list/todolists", newTodo)
+        .then((result) => {
+          console.log(result.status);
+          loadLists();
+          setAddNewCard(false);
+        });
     } catch (error) {
       console.log(error);
     }

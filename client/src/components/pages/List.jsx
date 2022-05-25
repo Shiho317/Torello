@@ -14,67 +14,72 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import NewCard from "./NewCard";
 import Todos from "./Todos";
 import axios from "axios";
+import { Droppable } from "react-beautiful-dnd";
 
 const List = ({ list, loadLists }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const onClickSetting = () => {
     setModalOpen((prev) => !prev);
-    setIsRenameModal(false)
+    setIsRenameModal(false);
   };
 
   const [addNewCard, setAddNewCard] = useState(false);
 
-  const deleteList = async() => {
-
+  const deleteList = async () => {
     const deletedList = {
-      id: list._id
-    }
+      id: list._id,
+    };
 
     try {
-      await axios.post("http://localhost:8888/api/list/deletelist", deletedList)
-      .then(result => {
-        loadLists()
-        setModalOpen(false)
-      })
+      await axios
+        .post("http://localhost:8888/api/list/deletelist", deletedList)
+        .then((result) => {
+          loadLists();
+          setModalOpen(false);
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  const [ isRenameModal, setIsRenameModal ] = useState(false)
-  const [ isListTitle, setIsListTitle ] = useState(list.title)
+  const [isRenameModal, setIsRenameModal] = useState(false);
+  const [isListTitle, setIsListTitle] = useState(list.title);
 
   const renameModalToggle = () => {
-    setIsRenameModal(prev => !prev)
-  }
+    setIsRenameModal((prev) => !prev);
+  };
 
-  const renameList = async(e) => {
+  const renameList = async (e) => {
     e.preventDefault();
 
     const renamedList = {
       id: list._id,
-      title: isListTitle
-    }
+      title: isListTitle,
+    };
 
     try {
-      await axios.post("http://localhost:8888/api/list/renamelist", renamedList)
-      .then(result => {
-        setIsRenameModal(prev => !prev)
-        setModalOpen(false)
-        loadLists()
-      })
-    } catch (error) {
-      
-    }
-  }
+      await axios
+        .post("http://localhost:8888/api/list/renamelist", renamedList)
+        .then((result) => {
+          setIsRenameModal((prev) => !prev);
+          setModalOpen(false);
+          loadLists();
+        });
+    } catch (error) {}
+  };
 
   return (
     <ListWrapper>
       <CardTitle>
-        { isRenameModal ? (
+        {isRenameModal ? (
           <RenameForm onSubmit={renameList}>
-            <input type='text' value={isListTitle} onChange={(e) => setIsListTitle(e.target.value)} required />
+            <input
+              type="text"
+              value={isListTitle}
+              onChange={(e) => setIsListTitle(e.target.value)}
+              required
+            />
             <button type="submit">Rename</button>
           </RenameForm>
         ) : (
@@ -100,19 +105,28 @@ const List = ({ list, loadLists }) => {
           )}
         </CardOption>
       </CardTitle>
-      <TodosWrapper>
-      {list.todos.map((item, index) => (
-        <Todos key={index} todo={item} />
-      ))}
-      </TodosWrapper>
-        {addNewCard ? (
-          <NewCard list={list} setAddNewCard={setAddNewCard} loadLists={loadLists}/>
-        ) : (
-          <AddCard onClick={() => setAddNewCard(true)}>
-            <MdOutlineAdd />
-            <p>Add a card</p>
-          </AddCard>
+      <Droppable droppableId={list.title}>
+        {(provided) => (
+          <TodosWrapper {...provided.droppableProps} ref={provided.innerRef}>
+            {list.todos.map((item, index) => (
+              <Todos key={index} todo={item} index={index} />
+            ))}
+            {provided.placeholder}
+          </TodosWrapper>
         )}
+      </Droppable>
+      {addNewCard ? (
+        <NewCard
+          list={list}
+          setAddNewCard={setAddNewCard}
+          loadLists={loadLists}
+        />
+      ) : (
+        <AddCard onClick={() => setAddNewCard(true)}>
+          <MdOutlineAdd />
+          <p>Add a card</p>
+        </AddCard>
+      )}
     </ListWrapper>
   );
 };
