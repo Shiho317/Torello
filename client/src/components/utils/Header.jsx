@@ -30,6 +30,8 @@ const Header = () => {
     }, 500);
   };
 
+  console.log(currUser)
+
   return (
     <HeaderWrapper>
       <h4>Trello</h4>
@@ -40,7 +42,7 @@ const Header = () => {
             style={{ backgroundColor: currUser.color }}
             onClick={() => openToggle()}
           >
-            <p>{currUser.name.split("")[0].toUpperCase()}</p>
+            <p></p>
           </UserInitial>
           {openLogout && (
             <LogoutModal>
