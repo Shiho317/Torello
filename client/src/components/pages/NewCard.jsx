@@ -30,7 +30,7 @@ const NewCard = ({ setAddNewCard, list, loadLists }) => {
     };
     try {
       await axios
-        .post("http://localhost:8888/api/list/todolists", newTodo)
+        .post("/api/list/todolists", newTodo)
         .then((result) => {
           console.log(result.status);
           loadLists();
