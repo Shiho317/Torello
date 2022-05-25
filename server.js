@@ -32,7 +32,6 @@ app.use("/api/user", userRoute);
 app.use("/api/list", listRoute);
 
 app.use(cors());
-app.use(express.static("public"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
