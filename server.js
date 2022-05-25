@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const dotenv = require('dotenv');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const userRoute = require("./routes/Users")
-const listRoute = require("./routes/Lists")
+const dotenv = require("dotenv");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const userRoute = require("./routes/Users");
+const listRoute = require("./routes/Lists");
 
 dotenv.config();
 
@@ -18,19 +18,20 @@ mongoose
   .then(() => console.log("mongoDB connected."))
   .catch((err) => console.log(err));
 
-  app.use(function (req, res, next) {
-    //Enabling CORS
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
+app.use(function (req, res, next) {
+  //Enabling CORS
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
+app.use("/api/user", userRoute);
+app.use("/api/list", listRoute);
 
 app.use(cors());
-app.use("/api/user", userRoute)
-app.use("/api/list", listRoute)
 app.use(express.static("public"));
 
 if (process.env.NODE_ENV === "production") {
@@ -43,4 +44,4 @@ if (process.env.NODE_ENV === "production") {
 
 const PORT = process.env.PORT || 8888;
 
-app.listen(PORT, () => console.log(`server is listening at ${PORT}`))
+app.listen(PORT, () => console.log(`server is listening at ${PORT}`));
