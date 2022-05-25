@@ -14,7 +14,7 @@ const AddNewList = ({ setAddNewList, loadLists }) => {
     }
 
     try {
-      await axios.post("/api/list/addlist", newTitle)
+      await axios.post("http://localhost:8888/api/list/addlist", newTitle)
       .then(result => {
         loadLists()
         setAddNewList(false)

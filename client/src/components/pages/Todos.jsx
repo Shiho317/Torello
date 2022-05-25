@@ -18,7 +18,7 @@ const Todos = ({ list, todo, index, loadLists }) => {
 
     try {
       await axios
-        .post("/api/list/todolists", deletedTodo)
+        .post("http://localhost:8888/api/list/todolists", deletedTodo)
         .then((result) => {
           loadLists();
         });

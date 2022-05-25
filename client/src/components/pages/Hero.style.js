@@ -29,6 +29,11 @@ cursor: pointer;
 }
 
 & h4{
+  width: 15rem;
   font-size: 0.8rem;
+
+  @media ${props => props.theme.device.laptop} {
+    width: 100%;
+  }
 }
 `;

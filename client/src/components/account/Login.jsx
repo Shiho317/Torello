@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       const result = await axios.post(
-        "/api/user/login",
+        "http://localhost:8888/api/user/login",
         currUser
       );
       const userData = {
@@ -32,7 +32,7 @@ const Login = () => {
         id: result.data.id,
       };
       myStorage.setItem("user", JSON.stringify(userData));
-      alert("You have successfully logged in.");
+      alert("You have successfully logged in.")
       setLoggedIn(true)
       setTimeout(() => {
         navigate("/workspace")

@@ -27,7 +27,7 @@ export const TodoWrapper = styled.div`
 `;
 
 export const TodoDue = styled.div`
-  width: 50%;
+  width: 70%;
   background: green;
   padding: 0.3rem;
   display: flex;
@@ -37,6 +37,10 @@ export const TodoDue = styled.div`
   color: white;
   border-radius: 3px;
   margin-top: 0.3rem;
+
+  @media ${(props) => props.theme.device.laptop} {
+    width: 50%;
+  }
 
   & p {
     color: white;

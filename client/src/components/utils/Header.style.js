@@ -2,17 +2,43 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
   width: 100%;
-  height: 5rem;
-  display: flex;
+  height: 8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   align-items: center;
-  justify-content: space-between;
   background: ${(props) => props.theme.color.black};
   color: ${(props) => props.theme.color.white};
   padding: 0 2rem;
+
+  @media ${(props) => props.theme.device.laptop} {
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & h4 {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  & h3 {
+    text-align: center;
+    grid-column: 1/4;
+    grid-row: 2/3;
+  }
 `;
 
 export const Icon = styled.div`
+  grid-column: 3/4;
+  grid-row: 1/2;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const UserInitial = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -37,6 +63,7 @@ export const LogoutModal = styled.ul`
 
   & li {
     list-style: none;
+    cursor: pointer;
 
     & p {
       font-size: 0.8rem;
@@ -50,6 +77,8 @@ export const LogoutModal = styled.ul`
 `;
 
 export const AccountOption = styled.div`
+  grid-column: 3/4;
+  grid-row: 1/2;
   display: flex;
   aling-items: center;
   justify-content: center;
