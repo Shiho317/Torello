@@ -20,7 +20,7 @@ const Signup = () => {
     };
 
     try {
-      await axios.post("/api/user/signup", newUser);
+      await axios.post("http://localhost:8888/api/user/signup", newUser);
       alert("You have successfully created account.");
       setTimeout(() => {
         navigate('/')

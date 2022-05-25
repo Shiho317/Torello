@@ -6,13 +6,14 @@ import {
   HeaderWrapper,
   Icon,
   LogoutModal,
+  UserInitial,
 } from "./Header.style";
 
 const Header = () => {
-  const { userInfo, myStorage, loggedIn, setLoggedIn } = useContext(AppContext);
+  const { userInfo, myStorage, setLoggedIn } = useContext(AppContext);
   const currUser = JSON.parse(userInfo);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [openLogout, setOpenLogout] = useState(false);
   const openToggle = () => {
@@ -20,17 +21,12 @@ const Header = () => {
   };
 
   const loggedOut = () => {
-    const resetCurrUser = {
-      name: "",
-      email: "",
-      color: "#ECECEC",
-      id: "",
-    };
-    myStorage.setItem("user", JSON.stringify(resetCurrUser));
+    myStorage.removeItem("user");
     alert("You have successfully logged out.");
-    setLoggedIn(false)
+    setLoggedIn(false);
+    setOpenLogout(false);
     setTimeout(() => {
-      navigate("/")
+      navigate("/");
     }, 500);
   };
 
@@ -38,12 +34,14 @@ const Header = () => {
     <HeaderWrapper>
       <h4>Trello</h4>
       <h3>our workspace</h3>
-      {loggedIn ? (
-        <Icon
-          style={{ backgroundColor: currUser.color }}
-          onClick={() => openToggle()}
-        >
-          <p>{currUser.name.split("")[0].toUpperCase()}</p>
+      {currUser !== null ? (
+        <Icon>
+          <UserInitial
+            style={{ backgroundColor: currUser.color }}
+            onClick={() => openToggle()}
+          >
+            <p>{currUser.name.split("")[0].toUpperCase()}</p>
+          </UserInitial>
           {openLogout && (
             <LogoutModal>
               <li onClick={() => loggedOut()}>
