@@ -60,7 +60,7 @@ const List = ({ list, loadLists }) => {
 
     try {
       await axios
-        .put("/api/list/renamelist", renamedList)
+        .post("/api/list/renamelist", renamedList)
         .then((result) => {
           setIsRenameModal((prev) => !prev);
           setModalOpen(false);

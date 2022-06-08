@@ -49,7 +49,7 @@ router.post("/deletelist", async (req, res) => {
   }
 });
 
-router.put("/renamelist", async (req, res) => {
+router.post("/renamelist", async (req, res) => {
   try {
     await List.findOneAndUpdate(
       { _id: req.body.id },
